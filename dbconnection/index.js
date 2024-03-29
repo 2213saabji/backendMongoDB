@@ -1,6 +1,6 @@
 const mongoose=require("mongoose");
 
-mongoose.connect(process.env.DB_STRING)
+mongoose.connect("mongodb+srv://2213saabji:go.ha.av123@projectonedatabase.ugaazg0.mongodb.net/backendmongopracdatabase")
 .then(() => {
     console.log(`database connection successful`);
 })

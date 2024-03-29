@@ -9,5 +9,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use("/user", userRouter);
-
+app.get("/",(req,res)=>{
+    res.status(200).send("server is working");
+})
 module.exports = app;

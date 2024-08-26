@@ -27,8 +27,10 @@ admin.initializeApp({
   databaseURL: "https://your-project-id.firebaseio.com",
 });
 
-const server = http.createServer();
+const app = express();
+const server = http.createServer(app);
 
+app.use(cors());
 // Set up CORS middleware with dynamic origin
 const corsOptions = {
   origin: process.env.NODE_ENV === 'production'

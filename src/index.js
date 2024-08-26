@@ -13,6 +13,7 @@
 
 
 
+// socketServer.js (Deploy this on a dedicated server)
 require('dotenv').config();
 const express = require('express');
 const http = require('http');
@@ -30,18 +31,18 @@ admin.initializeApp({
 const app = express();
 const server = http.createServer(app);
 
-app.use(cors());
-// Set up CORS middleware with dynamic origin
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production'
-    ? process.env.PROD_ORIGIN
-    : process.env.LOCAL_ORIGIN,
+  origin: process.env.CORS_ORIGIN || '*',
   methods: ['GET', 'POST'],
   credentials: true,
 };
 
+app.use(cors(corsOptions));
 
-const io = new Server(server);
+const io = new Server(server, {
+  cors: corsOptions,
+  path: '/socket.io/',
+});
 
 let drawingData = [];
 let undoStack = [];
@@ -109,5 +110,5 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`WebSocket server is running on port ${PORT}`);
 });

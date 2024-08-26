@@ -41,10 +41,7 @@ const corsOptions = {
 };
 
 
-const io = new Server(server, {
-  cors: corsOptions,
-  path: '/socket.io/',
-});
+const io = new Server(server);
 
 let drawingData = [];
 let undoStack = [];
